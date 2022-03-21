@@ -5,5 +5,6 @@ const router = Router();
 
 router.post('/', ReportsController.store);
 router.get('/', ReportsController.index);
+router.delete('/', ReportsController.deleteAll);
 
 module.exports = router;

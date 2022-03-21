@@ -22,6 +22,12 @@ class ReportsController {
 
     response.send({ report });
   }
+
+  async deleteAll(request, response) {
+    const rows = await ReportsRepository.deleteAll();
+
+    response.send(rows);
+  }
 }
 
 module.exports = new ReportsController();

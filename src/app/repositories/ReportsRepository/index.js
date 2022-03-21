@@ -23,6 +23,12 @@ class ReportsRepository {
 
     return report;
   }
+
+  async deleteAll() {
+    const rows = await prisma.report.deleteMany();
+
+    return rows;
+  }
 }
 
 module.exports = new ReportsRepository();
