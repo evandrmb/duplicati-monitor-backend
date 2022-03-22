@@ -7,12 +7,65 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Backup {
+  id         String   @id @default(uuid())
+  backupName String   @db.VarChar(255)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  Report     Report[]
+}
+
 model Report {
+  id             String       @id @default(uuid())
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  backup         Backup       @relation(fields: [backupId], references: [id])
+  backupId       String
+  deleteResult   DeleteResult @relation(fields: [deleteResultId], references: [id])
+  deleteResultId String
+  testResult     TestResult   @relation(fields: [testResultId], references: [id])
+  testResultId   String
+  examinedFiles  Int
+  openedFiles    Int
+  addedFiles     Int
+  addedFolders   Int
+  tooLargeFiles  Int
+  filesWithError Int
+  partialBackup  Boolean
+  mainOperation  String       @db.VarChar(30)
+  result         String       @db.VarChar(15)
+  beginTime      DateTime
+  endTime        DateTime
+  duration       DateTime
+  version        String       @db.VarChar(30)
+}
+
+model DeleteResult {
   id              String   @id @default(uuid())
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  lastBackupDate  DateTime
+  beginTime       DateTime
+  endTime         DateTime
+  duration        DateTime
+  version         String   @db.VarChar(30)
   bytesDownloaded Int
-  backupName      String   @db.VarChar(255)
-  result          String   @db.VarChar(10)
+  knownFileCount  Int
+  knownFileSize   Int
+  totalQuotaSpace Int
+  freeQuotaSpace  Int
+  filesDeleted    Int
+  Report          Report[]
+}
+
+model TestResult {
+  id                        String   @id @default(uuid())
+  verificationsActualLength Int
+  result                    String   @db.VarChar(15)
+  beginTime                 DateTime
+  endTime                   DateTime
+  duration                  DateTime
+  bytesDownloaded           Int
+  filesUploaded             Int
+  filesDownloaded           Int
+  filesDeleted              Int
+
+  Report Report[]
 }
