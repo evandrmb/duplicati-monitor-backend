@@ -27,8 +27,7 @@ CREATE TABLE "Report" (
     "result" VARCHAR(15) NOT NULL,
     "beginTime" TIMESTAMP(3) NOT NULL,
     "endTime" TIMESTAMP(3) NOT NULL,
-    "duration" TIMESTAMP(3) NOT NULL,
-    "version" VARCHAR(30) NOT NULL,
+    "version" VARCHAR(50) NOT NULL,
 
     CONSTRAINT "Report_pkey" PRIMARY KEY ("id")
 );
@@ -38,8 +37,7 @@ CREATE TABLE "DeleteResult" (
     "id" TEXT NOT NULL,
     "beginTime" TIMESTAMP(3) NOT NULL,
     "endTime" TIMESTAMP(3) NOT NULL,
-    "duration" TIMESTAMP(3) NOT NULL,
-    "version" VARCHAR(30) NOT NULL,
+    "version" VARCHAR(50) NOT NULL,
     "bytesDownloaded" INTEGER NOT NULL,
     "knownFileCount" INTEGER NOT NULL,
     "knownFileSize" INTEGER NOT NULL,
@@ -57,7 +55,6 @@ CREATE TABLE "TestResult" (
     "result" VARCHAR(15) NOT NULL,
     "beginTime" TIMESTAMP(3) NOT NULL,
     "endTime" TIMESTAMP(3) NOT NULL,
-    "duration" TIMESTAMP(3) NOT NULL,
     "bytesDownloaded" INTEGER NOT NULL,
     "filesUploaded" INTEGER NOT NULL,
     "filesDownloaded" INTEGER NOT NULL,

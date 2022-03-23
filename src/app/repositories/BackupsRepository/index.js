@@ -3,6 +3,16 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 class BackupsRepository {
+  async findById({ backupId }) {
+    const backup = await prisma.backup.findUnique({
+      where: {
+        id: backupId,
+      },
+    });
+
+    return backup;
+  }
+
   async findAll() {
     const backups = await prisma.backup.findMany();
 

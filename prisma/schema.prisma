@@ -25,6 +25,7 @@ model Report {
   deleteResultId String
   testResult     TestResult   @relation(fields: [testResultId], references: [id])
   testResultId   String
+
   examinedFiles  Int
   openedFiles    Int
   addedFiles     Int
@@ -32,20 +33,18 @@ model Report {
   tooLargeFiles  Int
   filesWithError Int
   partialBackup  Boolean
-  mainOperation  String       @db.VarChar(30)
-  result         String       @db.VarChar(15)
+  mainOperation  String   @db.VarChar(30)
+  result         String   @db.VarChar(15)
   beginTime      DateTime
   endTime        DateTime
-  duration       DateTime
-  version        String       @db.VarChar(30)
+  version        String   @db.VarChar(50)
 }
 
 model DeleteResult {
   id              String   @id @default(uuid())
   beginTime       DateTime
   endTime         DateTime
-  duration        DateTime
-  version         String   @db.VarChar(30)
+  version         String   @db.VarChar(50)
   bytesDownloaded Int
   knownFileCount  Int
   knownFileSize   Int
@@ -61,7 +60,6 @@ model TestResult {
   result                    String   @db.VarChar(15)
   beginTime                 DateTime
   endTime                   DateTime
-  duration                  DateTime
   bytesDownloaded           Int
   filesUploaded             Int
   filesDownloaded           Int

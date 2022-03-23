@@ -9,15 +9,54 @@ class ReportsRepository {
     return reports;
   }
 
+  async findByBackupId(backupId) {
+    const reports = await prisma.report.findMany({
+      where: {
+        backupId,
+      },
+    });
+
+    return reports;
+  }
+
   async store({
-    lastBackupDate, bytesDownloaded, backupName, result,
+    backupId,
+    deleteResultId,
+    testResultId,
+    // lastBackupDate,
+    // bytesDownloaded,
+    result,
+    examinedFiles,
+    openedFiles,
+    addedFiles,
+    addedFolders,
+    tooLargeFiles,
+    filesWithError,
+    partialBackup,
+    mainOperation,
+    beginTime,
+    endTime,
+    version,
   }) {
     const report = await prisma.report.create({
       data: {
-        lastBackupDate,
-        bytesDownloaded,
-        backupName,
+        backupId,
+        deleteResultId,
+        testResultId,
+        // lastBackupDate,
+        // bytesDownloaded,
         result,
+        examinedFiles,
+        openedFiles,
+        addedFiles,
+        addedFolders,
+        tooLargeFiles,
+        filesWithError,
+        partialBackup,
+        mainOperation,
+        beginTime,
+        endTime,
+        version,
       },
     });
 
