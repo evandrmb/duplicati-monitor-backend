@@ -1,6 +1,5 @@
 const express = require('express');
 const logger = require('./utils');
-
 require('express-async-errors');
 const cors = require('./app/middlewares/cors');
 const errorHandler = require('./app/middlewares/errorHandler');
